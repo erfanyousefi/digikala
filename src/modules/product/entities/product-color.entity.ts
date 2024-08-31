@@ -1,5 +1,12 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import {Product} from "./product.entity";
+import {Basket} from "src/modules/basket/entity/basket.entity";
 
 @Entity()
 export class ProductColor {
@@ -21,4 +28,6 @@ export class ProductColor {
   active_discount: boolean;
   @ManyToOne(() => Product, (product) => product.colors, {onDelete: "CASCADE"})
   product: Product;
+  @OneToMany(() => Basket, (basket) => basket.discount)
+  baskets: Basket[];
 }
