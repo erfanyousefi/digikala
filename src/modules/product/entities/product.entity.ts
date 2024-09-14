@@ -1,3 +1,5 @@
+import {Basket} from "src/modules/basket/entity/basket.entity";
+import {OrderItems} from "src/modules/order/entity/order-items.entity";
 import {
   Column,
   CreateDateColumn,
@@ -5,11 +7,10 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import {ProductType} from "../enum/type.enum";
+import {ProductColor} from "./product-color.entity";
 import {ProductDetail} from "./product-detail.entity";
 import {ProductSize} from "./product-size.entity";
-import {ProductColor} from "./product-color.entity";
-import {ProductType} from "../enum/type.enum";
-import {Basket} from "src/modules/basket/entity/basket.entity";
 
 @Entity()
 export class Product {
@@ -43,4 +44,6 @@ export class Product {
   sizes: ProductSize[];
   @OneToMany(() => Basket, (basket) => basket.discount)
   baskets: Basket[];
+  @OneToMany(() => OrderItems, (order) => order.product)
+  orders: OrderItems[];
 }
