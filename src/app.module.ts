@@ -1,8 +1,9 @@
 import {Module} from "@nestjs/common";
 import {TypeOrmModule} from "@nestjs/typeorm";
-import {ProductModule} from "./modules/product/product.module";
-import {DiscountModule} from "./modules/discount/discount.module";
 import {BasketModule} from "./modules/basket/basket.module";
+import {DiscountModule} from "./modules/discount/discount.module";
+import {ProductModule} from "./modules/product/product.module";
+import {PaymentModule} from "./modules/payment/payment.module";
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import {BasketModule} from "./modules/basket/basket.module";
     ProductModule,
     DiscountModule,
     BasketModule,
+    PaymentModule,
   ],
   controllers: [],
   providers: [],
