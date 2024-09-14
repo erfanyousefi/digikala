@@ -9,6 +9,7 @@ import {
 } from "@nestjs/common";
 import {ApiTags} from "@nestjs/swagger";
 import {BasketService} from "./basket.service";
+import {AddDiscountToBasketDto} from "./dto/discount.dto";
 import {BasketDto} from "./dto/product.dto";
 
 @Controller("basket")
@@ -16,13 +17,17 @@ import {BasketDto} from "./dto/product.dto";
 export class BasketController {
   constructor(private basketService: BasketService) {}
   @Get()
-  basket() {}
+  basket() {
+    return this.basketService.getBasket();
+  }
   @Post("/add")
   addToBasket(@Body() basketDto: BasketDto) {
     return this.basketService.addToBasket(basketDto);
   }
   @Post("/add-discount")
-  addDiscountToBasket() {}
+  addDiscountToBasket(@Body() discountDto: AddDiscountToBasketDto) {
+    return this.basketService.addCodeToBasket(discountDto);
+  }
   @Delete("/remove")
   removeFromBasket(@Body() basketDto: BasketDto) {
     return this.basketService.removeFromBasket(basketDto);
@@ -32,5 +37,7 @@ export class BasketController {
     return this.basketService.removeFromBasketById(id);
   }
   @Delete("/remove-discount")
-  removeDiscountFromBasket() {}
+  removeDiscountFromBasket(@Body() discountDto: AddDiscountToBasketDto) {
+    return this.basketService.removeCodeFromBasket(discountDto);
+  }
 }
