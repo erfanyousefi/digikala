@@ -7,6 +7,8 @@ import {
 } from "typeorm";
 import {Product} from "./product.entity";
 import {Basket} from "src/modules/basket/entity/basket.entity";
+import {Order} from "src/modules/order/entity/order.entity";
+import {OrderItems} from "src/modules/order/entity/order-items.entity";
 
 @Entity()
 export class ProductColor {
@@ -30,4 +32,6 @@ export class ProductColor {
   product: Product;
   @OneToMany(() => Basket, (basket) => basket.discount)
   baskets: Basket[];
+  @OneToMany(() => OrderItems, (order) => order.color)
+  orders: OrderItems[];
 }
