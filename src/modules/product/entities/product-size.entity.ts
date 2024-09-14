@@ -1,3 +1,5 @@
+import {Basket} from "src/modules/basket/entity/basket.entity";
+import {OrderItems} from "src/modules/order/entity/order-items.entity";
 import {
   Column,
   Entity,
@@ -6,7 +8,6 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import {Product} from "./product.entity";
-import {Basket} from "src/modules/basket/entity/basket.entity";
 
 @Entity()
 export class ProductSize {
@@ -28,4 +29,6 @@ export class ProductSize {
   product: Product;
   @OneToMany(() => Basket, (basket) => basket.size)
   baskets: Basket[];
+  @OneToMany(() => OrderItems, (order) => order.size)
+  orders: OrderItems[];
 }
