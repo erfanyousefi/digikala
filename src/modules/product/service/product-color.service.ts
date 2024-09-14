@@ -95,7 +95,7 @@ export class ProductColorService {
       if (discount) color.discount = discount;
       if (price) color.price = price;
       let previousCount = color.count;
-      if (!isNaN(parseInt(count.toString())) && +count > 0) {
+      if (count && !isNaN(parseInt(count.toString())) && +count > 0) {
         product.count =
           parseInt(product.count.toString()) -
           parseInt(previousCount.toString());

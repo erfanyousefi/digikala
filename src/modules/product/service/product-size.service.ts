@@ -4,13 +4,13 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
-import {DataSource, Repository} from "typeorm";
-import {ProductSize} from "../entities/product-size.entity";
-import {AddSizeDto, UpdateSizeDto} from "../dto/size.dto";
-import {ProductService} from "./product.service";
 import {toBoolean} from "src/utils/functions";
+import {DataSource, Repository} from "typeorm";
+import {AddSizeDto, UpdateSizeDto} from "../dto/size.dto";
+import {ProductSize} from "../entities/product-size.entity";
 import {Product} from "../entities/product.entity";
 import {ProductType} from "../enum/type.enum";
+import {ProductService} from "./product.service";
 
 @Injectable()
 export class ProductSizeService {
@@ -81,11 +81,13 @@ export class ProductSizeService {
       });
       if (!size) throw new NotFoundException("not found product");
       if (sizeTitle) size.size = sizeTitle;
+      console.log(active_discount);
+
       if (active_discount) size.active_discount = toBoolean(active_discount);
       if (discount) size.discount = discount;
       if (price) size.price = price;
       let previousCount = size.count;
-      if (!isNaN(parseInt(count.toString())) && +count > 0) {
+      if (count && !isNaN(parseInt(count.toString())) && +count > 0) {
         product.count =
           parseInt(product.count.toString()) -
           parseInt(previousCount.toString());
